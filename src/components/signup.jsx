@@ -27,7 +27,7 @@ const Signup = () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: 'http://localhost:5173/dashboard', 
+        redirectTo: 'https://eden-acad.netlify.app/', 
       },
     });
     if (error) {
