@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Login from './components/Login'
+import Signup from './components/signup'
 import { createBrowserRouter , RouterProvider } from 'react-router-dom'
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
     {
       path: '/login',
       element: <><Navbar /><Login /></>,
+    },
+    {
+      path: '/signup',
+      element: <><Navbar /><Signup /></>,
     },
   ]);
 
