@@ -7,7 +7,7 @@ function MyLearning( {activeTab , favorites , setFavorites} ) {
 
 const [myCourses, setMyCourses] = useState([]);
 const fetchMyLearning = async () => {
-  
+
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
@@ -29,7 +29,7 @@ const fetchMyLearning = async () => {
 
 useEffect(() => {
 fetchMyLearning();
-}, []);
+});
 
 
   return (
