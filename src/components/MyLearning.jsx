@@ -38,9 +38,9 @@ fetchMyLearning();
       <>
         {myCourses.length === 0 ? (
           <div className="text-center py-16">
-            <Heart className="mx-auto text-gray-300 mb-4" size={64} />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No favorites yet</h3>
-            <p className="text-gray-500">Add courses to your favorites to see them here</p>
+            <Heart className="mx-auto text-gray-100 mb-4" size={64} />
+            <h3 className="text-xl font-semibold text-gray-100 mb-2">No favorites yet</h3>
+            <p className="text-gray-100">Add courses to your favorites to see them here</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
