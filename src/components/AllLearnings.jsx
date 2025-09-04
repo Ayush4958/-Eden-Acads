@@ -18,7 +18,7 @@ function AllLearnings( {filteredCourses , favorites , toggleFavorite , getDiffic
                           {course.icon}
                         </div>
                         <button
-                          onClick={() => toggleFavorite(course.id)}
+                          onClick={() => toggleFavorite(course)}
                           className={`p-3 rounded-2xl transition-all duration-300 ${
                             favorites.has(course.id)
                               ? 'bg-red-50 text-red-500 shadow-md ring-2 ring-red-100'

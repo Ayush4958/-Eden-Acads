@@ -5,6 +5,7 @@ import DashNav from './DashNav';
 import SearchFilter from './SearchFilter';
 import MyLearning from './MyLearning';
 import AllLearnings from './AllLearnings';
+import { supabase } from '../supabaseClient';
 import { Heart, Search, Clock, TrendingUp, BookOpen, Play, Award, Star } from 'lucide-react';
 
 function Dashboard() {
@@ -83,17 +84,34 @@ function Dashboard() {
     }
   ];
 
-  const toggleFavorite = (courseId) => {
-    setFavorites(prev => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(courseId)) {
-        newFavorites.delete(courseId);
-      } else {
-        newFavorites.add(courseId);
-      }
-      return newFavorites;
-    });
-  };
+const toggleFavorite = async (course) => {
+ const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    alert("Please log in first.");
+    return;
+  }
+  const { error } = await supabase.from('favourites').insert([
+    {
+      title: course.title,
+      progress: course.progress,
+      topicsCompleted: course.topicsCompleted,
+      totalTopics: course.totalTopics,
+      difficulty: course.difficulty,
+      color: course.color,
+      bgGradient: course.bgGradient,
+      user_id: user.id, // very important
+    }
+  ]);
+
+  if (error) {
+    console.error('Error saving favorite:', error);
+  } else {
+    alert("Added to My Learning!");
+  }
+  console.log("Added to My Learning:", course.title);
+};
+
 
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
