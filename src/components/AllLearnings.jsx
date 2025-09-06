@@ -48,41 +48,6 @@ function AllLearnings( {filteredCourses , favorites , toggleFavorite , getDiffic
                         </div>
                       </div>
 
-                      {/* Progress Section */}
-                      <div className="mb-6">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm font-medium text-gray-700">Progress</span>
-                          <span className="text-sm font-bold text-gray-900">{course.progress}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                          <div
-                            className={`h-2 bg-gradient-to-r ${course.bgGradient} transition-all duration-500`}
-                            style={{ width: `${course.progress}%` }}
-                          ></div>
-                        </div>
-                        <div className="flex justify-between items-center mt-2">
-                          <span className="text-xs text-gray-500">
-                            {course.topicsCompleted}/{course.totalTopics} topics
-                          </span>
-                          <span className="text-xs text-gray-500">
-                            {course.totalTopics - course.topicsCompleted} remaining
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div className="flex gap-3">
-                        <button className={`flex-1 py-3 px-4 rounded-xl text-white font-semibold transition-all duration-200 ${getButtonStyle(course.progress)} shadow-lg hover:shadow-xl transform hover:scale-105`}>
-                          <span className="flex items-center justify-center gap-2">
-                            <Play size={16} />
-                            {getButtonText(course.progress)}
-                          </span>
-                        </button>
-                        <button className="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105">
-                          Quiz
-                        </button>
-                      </div>
-
                     </div>
                   </div>
                 </div>
