@@ -4,6 +4,9 @@ import { supabase } from '../supabaseClient';
 import { useNavigate , NavLink } from 'react-router-dom';
 
 const Login = () => {
+
+const [user , setuser] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -17,6 +20,7 @@ const Login = () => {
     if (error) {
       alert(error.message);
     } else {
+      setuser(true);
       alert('Login successful!');
       navigate('/dashboard'); // or wherever your app goes
     }
@@ -31,6 +35,9 @@ const Login = () => {
 });
   if (error) {
     alert(error.message);
+  }
+  else{
+    setuser(true);
   }
 };
 
