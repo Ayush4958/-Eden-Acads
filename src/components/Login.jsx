@@ -5,8 +5,6 @@ import { useNavigate , NavLink } from 'react-router-dom';
 
 const Login = () => {
 
-const [user , setuser] = React.useState(false);
-
   const {
     register,
     handleSubmit,
