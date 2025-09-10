@@ -6,31 +6,51 @@ import { supabase } from '../supabaseClient';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // managing the session state
-  const [session , setsession] = useState(null)
-  const [user , setuser] = useState(null);
+  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  // Fetching current session from supabase
-  const fetchsession = async () =>{
-    const currentsession = await supabase.auth.getSession();
-    setuser(true)
-    console.log(currentsession)
-    setsession(currentsession.data.session)
-  }
-  useEffect(() =>{
-    fetchsession()
-  }, [])
-
-  // Managing log out option
-  const logout = async() =>{
-    const { error } = await supabase.auth.signOut();
-    setuser(false);
-    navigate('/');
-    alert("You were logged out")
-    if(error){
-      console.log("error while logging out" , error)
+// Fetching current session from supabase
+const fetchSession = async () => {
+  try {
+    const { data: { session: currentSession }, error } = await supabase.auth.getSession();
+    if (error) {
+      console.error('Error fetching session:', error);
+      return;
     }
+    if (currentSession) {
+      setUser(currentSession.user);
+      setSession(currentSession);
+      console.log(currentSession);
+      alert("You are logged in");
+    } else {
+      setUser(null);
+      setSession(null);
+    }
+  } catch (err) {
+    console.error('Unexpected error:', err);
   }
+};
+useEffect(() => {
+  fetchSession();
+}, []);
+
+// Managing log out option
+const logout = async () => {
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error during logout:", error);
+      return;
+    }
+    setUser(null);
+    setSession(null);
+    navigate('/' , { replace: true });
+    alert("You were logged out");
+  } catch (err) {
+    console.error('Unexpected error during logout:', err);
+  }
+};
 
   // Function to determine NavLink classes based on active state
   const getNavLinkClass = (isActive) => {
@@ -158,7 +178,8 @@ const Navbar = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-400 to-orange-400 opacity-0 group-hover:opacity-15 blur transition-opacity duration-300"></div>
                 <div className="relative flex items-center space-x-2">
                   <LogIn className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  <button onClick={user ? logout : ""} className="bg-gradient-to-r from-amber-300 to-orange-300 bg-clip-text text-transparent group-hover:from-amber-200 group-hover:to-orange-200">{user ? "Login" : "Logout"}</button>
+                  <button onClick={user ? logout : () => navigate('/login')}  className="bg-gradient-to-r from-amber-300 to-orange-300 bg-clip-text text-transparent group-hover:from-amber-200 group-hover:to-orange-200"> 
+                    {user ? 'Logout' : 'Login'} </button>
                 </div>
               </NavLink>
 
