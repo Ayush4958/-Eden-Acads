@@ -5,11 +5,9 @@ import { useNavigate , NavLink } from 'react-router-dom';
 
 const Login = () => {
 
-  const {
-    register,
+  const {register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors }} = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -20,7 +18,7 @@ const Login = () => {
     } else {
       setuser(true);
       alert('Login successful!');
-      navigate('/dashboard'); // or wherever your app goes
+      navigate('/', { replace: true }); // or wherever your app goes
     }
   };
 
