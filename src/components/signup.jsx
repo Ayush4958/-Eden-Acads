@@ -19,7 +19,7 @@ const Signup = () => {
       alert(error.message);
     } else {
       alert('Signup successful! Please check your email to confirm.');
-      navigate('/login');
+      navigate('/', { replace: true });
     }
   };
 
